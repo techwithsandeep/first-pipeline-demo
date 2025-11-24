@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Minimal security (inline allowed) -->
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sandeep Gompa — DevSecOps Demo</title>
+
+    <!-- INLINE CSS -->
+    <style>
+        body {
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #131862, #6f84ff);
+            color: #eee;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin: 0;
+        }
+
+        .hero p {
+            margin-top: 10px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 35px auto;
+            padding: 10px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 25px;
+            border-radius: 16px;
+            backdrop-filter: blur(8px);
+            margin-bottom: 30px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: #ffe26e;
+        }
+
+        /* profile links */
+        .profile-links {
+            list-style: none;
+            padding-left: 0;
+            margin: 10px 0;
+        }
+
+        .profile-links li {
+            padding: 6px 0;
+            font-size: 1.05rem;
+        }
+
+        .profile-links a {
+            color: #8aff9c;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .profile-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* input group */
+        .input-group {
+            display: flex;
+            gap: 8px;
+            margin: 12px 0;
+        }
+
+        input {
+            flex: 1;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        button {
+            padding: 10px 18px;
+            background: #ffe26e;
+            color: #1b1b1b;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #ffcb48;
+        }
+
+        .result {
+            font-size: 1.2rem;
+            color: #8aff9c;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .devops-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .devops-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            font-size: 1.1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 30px;
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="hero">
+        <h1>🚀 DevSecOps Learning Portal</h1>
+        <p>Shift-left Security • Automation • Zero Trust</p>
+    </header>
+
+    <main class="container">
+
+        <!-- PROFILE -->
+        <section class="card">
+            <h2>👨‍💻 About Me</h2>
+            <p><strong>Name:</strong> Sandeep Gompa</p>
+
+            <ul class="profile-links">
+                <li>🔗 GitHub:
+                    <a href="https://github.com/techwithsandeep" target="_blank" rel="noopener noreferrer">
+                        techwithsandeep
+                    </a>
+                </li>
+
+                <li>🐦 X (Twitter):
+                    <a href="https://x.com/techwithsandeep" target="_blank" rel="noopener noreferrer">
+                        @techwithsandeep
+                    </a>
+                </li>
+
+                <li>✍️ Medium:
+                    <a href="https://medium.com/@techwithsandeep" target="_blank" rel="noopener noreferrer">
+                        techwithsandeep
+                    </a>
+                </li>
+            </ul>
+        </section>
+
+
+        <!-- INPUT DEMO -->
+        <section class="card">
+            <h2>✨ User Input Demo (XSS Safe)</h2>
+            <p>Enter your name — we sanitize it before showing:</p>
+
+            <div class="input-group">
+                <input type="text" id="userInput" placeholder="Type your name here...">
+                <button id="btnSave">Submit</button>
+            </div>
+
+            <p id="output" class="result"></p>
+        </section>
+
+
+        <!-- DEVSECOPS PRINCIPLES -->
+        <section class="card">
+            <h2>🔐 DevSecOps Principles</h2>
+            <ul class="devops-list">
+                <li>⚡ Shift-left security</li>
+                <li>🛡️ Static & Dynamic Scanning (SAST / DAST)</li>
+                <li>🔎 Dependency Scanning (SCA)</li>
+                <li>🤖 CI/CD Automation</li>
+                <li>🔑 Secret Management</li>
+                <li>🌐 Zero-Trust Architecture</li>
+            </ul>
+        </section>
+
+    </main>
+
+    <footer>
+        Built with ❤️ by Sandeep Gompa for DevSecOps Learning
+    </footer>
+
+
+    <!-- INLINE JS -->
+    <script>
+        function sanitize(input) {
+            return input.replace(/[<>]/g, "");
+        }
+
+        document.getElementById("btnSave").addEventListener("click", () => {
+            const inputValue = document.getElementById("userInput").value;
+            const safeValue = sanitize(inputValue);
+            document.getElementById("output").textContent = `Hello, ${safeValue}!`;
+        });
+    </script>
+
+</body>
+</html>
+
